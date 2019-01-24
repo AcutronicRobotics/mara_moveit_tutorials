@@ -1,0 +1,10 @@
+<launch>
+  <!-- send MARA urdf to parameter server -->
+  <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find mara_description)/urdf/mara_robot_camera_top.urdf.xacro'" />
+
+  <include file="$(find mara_moveit_config)/launch/planning_context.launch"/>
+
+  <node name="planning_scene_tutorial" pkg="mara_moveit_tutorials" type="planning_scene_tutorial" respawn="false" output="screen">
+    <rosparam command="load" file="$(find mara_moveit_config)/config/kinematics.yaml"/>
+  </node>
+</launch>
