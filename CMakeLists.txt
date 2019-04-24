@@ -1,14 +1,7 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(mara_moveit_tutorials)
 
-add_compile_options(-std=c++11)
-
-find_package(Eigen3 REQUIRED)
-
-# Eigen 3.2 (Wily) only provides EIGEN3_INCLUDE_DIR, not EIGEN3_INCLUDE_DIRS
-if(NOT EIGEN3_INCLUDE_DIRS)
-  set(EIGEN3_INCLUDE_DIRS ${EIGEN3_INCLUDE_DIR})
-endif()
+add_compile_options(-std=c++14)
 
 find_package(catkin REQUIRED
   COMPONENTS
@@ -17,6 +10,7 @@ find_package(catkin REQUIRED
     moveit_visual_tools
     moveit_ros_planning
     moveit_ros_planning_interface
+    moveit_ros_perception
     pluginlib
     geometric_shapes
     pcl_ros
@@ -27,6 +21,7 @@ find_package(catkin REQUIRED
     tf2_geometry_msgs
 )
 
+find_package(Eigen3 REQUIRED)
 find_package(Boost REQUIRED system filesystem date_time thread)
 
 set(THIS_PACKAGE_INCLUDE_DIRS
@@ -37,12 +32,12 @@ catkin_package(
   LIBRARIES
     interactivity_utils
   INCLUDE_DIRS
-    ${THIS_PACKAGE_INCLUDE_DIRS}
   CATKIN_DEPENDS
     moveit_core
     moveit_visual_tools
     moveit_ros_planning_interface
     interactive_markers
+    tf2_geometry_msgs
   DEPENDS
     EIGEN3
 )
@@ -62,6 +57,7 @@ add_subdirectory(lessons/motion_planning_api)
 add_subdirectory(lessons/motion_planning_pipeline)
 add_subdirectory(lessons/move_group_interface)
 add_subdirectory(lessons/move_group_python_interface)
-add_subdirectory(lessons/collision_environments)
+#add_subdirectory(lessons/collision_environments)
 add_subdirectory(lessons/pick_place)
 add_subdirectory(lessons/visualizing_collisions)
+add_subdirectory(lessons/interactivity)
