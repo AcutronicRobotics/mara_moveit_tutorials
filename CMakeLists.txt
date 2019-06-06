@@ -36,7 +36,7 @@ link_directories(${rclcpp_LIBRARY_DIRS})
 add_subdirectory(tutorials/move_group_interface)
 
 ament_export_include_directories(include)
-ament_export_dependencies(moveit_core)
-ament_export_dependencies(moveit_visual_tools)
 ament_export_dependencies(moveit_ros_planning_interface)
 ament_export_dependencies(EIGEN3)
+
+ament_package()
