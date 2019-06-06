@@ -195,7 +195,7 @@ int main(int argc, char** argv)
   RCLCPP_INFO(node->get_logger(), "Visualizing plan 2 (joint space goal) %s", success ? "" : "FAILED");
 
 
-  printf("%d %d %d\n",  my_plan.start_state_.joint_state.name.size(),  my_plan.start_state_.joint_state.position.size(),  my_plan.start_state_.joint_state.velocity.size());
+  printf("%ld %ld %ld\n",  my_plan.start_state_.joint_state.name.size(),  my_plan.start_state_.joint_state.position.size(),  my_plan.start_state_.joint_state.velocity.size());
 
   for(int i = 0; i < my_plan.start_state_.joint_state.name.size(); i++) {
     printf("%s %.5f\n", my_plan.start_state_.joint_state.name[i].c_str(), my_plan.start_state_.joint_state.position[i]);
