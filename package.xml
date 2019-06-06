@@ -7,6 +7,7 @@
   <!-- Example:  -->
   <!-- <maintainer email="jane.doe@example.com">Jane Doe</maintainer> -->
   <maintainer email="alex@erlerobotics.com">Alejandro</maintainer>
+  <maintainer email="anasarrak@erlerobotics.com">Anas Mchichou</maintainer>
   <!-- One license tag required, multiple allowed, one license per tag -->
   <!-- Commonly used license strings: -->
   <!--   BSD, MIT, Boost Software License, GPLv2, GPLv3, LGPLv2.1, LGPLv3 -->
@@ -14,9 +15,8 @@
 
   <author>Alejandro Hernandez</author>
 
-  <export>
-    <build_type>ament_cmake</build_type>
-  </export>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
   <!-- <export>
     <moveit_core plugin="${prefix}/mara_manipulator_moveit_ikfast_plugin_description.xml"/>
   </export> -->
@@ -25,4 +25,8 @@
   <depend>moveit_ros_planning_interface</depend>
   <depend>rclcpp</depend>
   <depend>pluginlib</depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
 </package>
