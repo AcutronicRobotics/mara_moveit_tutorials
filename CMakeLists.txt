@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.10.2)
 project(mara_moveit_tutorials)
 
 # Default to C++14
@@ -6,32 +6,37 @@ if(NOT CMAKE_CXX_STANDARD)
   set(CMAKE_CXX_STANDARD 14)
 endif()
 
-# add_compile_options(-Wall -Wextra -Wpedantic -Werror=ignored-qualifiers)
+find_package(Eigen3 REQUIRED)
+
+# Eigen 3.2 (Wily) only provides EIGEN3_INCLUDE_DIR, not EIGEN3_INCLUDE_DIRS
+if(NOT EIGEN3_INCLUDE_DIRS)
+  set(EIGEN3_INCLUDE_DIRS ${EIGEN3_INCLUDE_DIR})
+endif()
 
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rclcpp_action REQUIRED)
 find_package(moveit_ros_planning_interface REQUIRED)
 
-include_directories(include)
+find_package(Boost REQUIRED system filesystem date_time thread)
 
-add_executable(move_group_interface_tutorial
-  src/move_group_interface_tutorial.cpp
-)
-ament_target_dependencies(move_group_interface_tutorial
-  rclcpp
-  moveit_ros_planning_interface
-)
+###########
+## Build ##
+###########
 
-target_include_directories(move_group_interface_tutorial PUBLIC
-  ${moveit_ros_planning_interface_INCLUDE_DIRS}
-)
+include_directories(SYSTEM ${THIS_PACKAGE_INCLUDE_DIRS}
+ ${Boost_INCLUDE_DIR}
+ ${EIGEN3_INCLUDE_DIRS})
 
-target_link_libraries(move_group_interface_tutorial
-  ${moveit_ros_planning_interface_LIBRARIES}
-)
+include_directories(${rclcpp_INCLUDE_DIRS}
+ ${moveit_ros_planning_interface_INCLUDE_DIRS})
 
-install(TARGETS
-  move_group_interface_tutorial
-  DESTINATION lib/${PROJECT_NAME}
-)
+link_directories(${rclcpp_LIBRARY_DIRS})
+
+add_subdirectory(tutorials/move_group_interface)
+
+ament_export_include_directories(include)
+ament_export_dependencies(moveit_ros_planning_interface)
+ament_export_dependencies(EIGEN3)
+
+ament_package()
