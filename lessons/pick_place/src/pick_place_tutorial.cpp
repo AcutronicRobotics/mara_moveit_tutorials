@@ -49,8 +49,8 @@ void openGripper(trajectory_msgs::JointTrajectory& posture)
   // BEGIN_SUB_TUTORIAL open_gripper
   /* Add both finger joints of MARA robot. */
   posture.joint_names.resize(2);
-  posture.joint_names[0] = "right_inner_knuckle_joint";
-  posture.joint_names[1] = "left_inner_knuckle_joint";
+  posture.joint_names[0] = "robotiq_arg2f_base_to_left_inner_knuckle";
+  posture.joint_names[1] = "robotiq_arg2f_base_to_right_inner_knuckle";
 
   /* Set them as open, wide enough for the object to fit. */
   posture.points.resize(1);
@@ -66,8 +66,8 @@ void closedGripper(trajectory_msgs::JointTrajectory& posture)
   // BEGIN_SUB_TUTORIAL closed_gripper
   /* Add both finger joints of MARA robot. */
   posture.joint_names.resize(2);
-  posture.joint_names[0] = "right_inner_knuckle_joint";
-  posture.joint_names[1] = "left_inner_knuckle_joint";
+  posture.joint_names[0] = "robotiq_arg2f_base_to_left_inner_knuckle";
+  posture.joint_names[1] = "robotiq_arg2f_base_to_right_inner_knuckle";
 
   /* Set them as closed. */
   posture.points.resize(1);
@@ -89,18 +89,15 @@ void pick(moveit::planning_interface::MoveGroupInterface& move_group)
   // Setting grasp pose
 
   grasps[0].grasp_pose.header.frame_id = "world";
-  tf2::Quaternion orientation;
-  orientation.setRPY(-1.5701278, -0.0054261 ,0.0114008);
-  grasps[0].grasp_pose.pose.orientation = tf2::toMsg(orientation);
+  
+  grasps[0].grasp_pose.pose.orientation.x = -0.704938387443;
+  grasps[0].grasp_pose.pose.orientation.y = 0.00060725088634;
+  grasps[0].grasp_pose.pose.orientation.z = -0.00606829807807;
+  grasps[0].grasp_pose.pose.orientation.w = 0.709242325947;
 
-  // grasps[0].grasp_pose.pose.orientation.x = -0.706867244916;
-  // grasps[0].grasp_pose.pose.orientation.y = 0.00211039982268;
-  // grasps[0].grasp_pose.pose.orientation.z = 0.00594983066932;
-  // grasps[0].grasp_pose.pose.orientation.w = 0.707318064093;
-
-  grasps[0].grasp_pose.pose.position.x = 0.542542881168;
-  grasps[0].grasp_pose.pose.position.y = -0.000345518257861;
-  grasps[0].grasp_pose.pose.position.z = 1.20300168666;
+  grasps[0].grasp_pose.pose.position.x = 0.540644550905;
+  grasps[0].grasp_pose.pose.position.y = -0.00991741194397;
+  grasps[0].grasp_pose.pose.position.z = 1.13115415098;
   // Setting pre-grasp approach
   // ++++++++++++++++++++++++++
   /* Defined with respect to frame_id */
@@ -152,19 +149,14 @@ void place(moveit::planning_interface::MoveGroupInterface& group)
   // +++++++++++++++++++++++++++
   place_location[0].place_pose.header.frame_id = "world";
   tf2::Quaternion orientation;
-  // orientation.setRPY(2.2266593, -1.5482158, -2.5032013 );
-  //
-  // place_location[0].place_pose.pose.orientation = tf2::toMsg(orientation);
+  orientation.setRPY(-3.1156635283293475, 0.013729569236046877, 1.5848739761145623);
 
-  place_location[0].place_pose.pose.orientation.x = -0.494481092405;
-  place_location[0].place_pose.pose.orientation.y = -0.512224064265;
-  place_location[0].place_pose.pose.orientation.z = 0.496681875859;
-  place_location[0].place_pose.pose.orientation.w = 0.496409177427;
+  place_location[0].place_pose.pose.orientation = tf2::toMsg(orientation);
 
   /* While placing it is the exact location of the center of the object. */
-  place_location[0].place_pose.pose.position.x = 0.0048252247931;
-  place_location[0].place_pose.pose.position.y = 0.397275288898;
-  place_location[0].place_pose.pose.position.z = 1.18918246187;
+  place_location[0].place_pose.pose.position.x = 0.0156210700905;
+  place_location[0].place_pose.pose.position.y = 0.461283199653;
+  place_location[0].place_pose.pose.position.z = 1.15249349185;
 
   // Setting pre-place approach
   // ++++++++++++++++++++++++++
