@@ -34,6 +34,7 @@ include_directories(${rclcpp_INCLUDE_DIRS}
 link_directories(${rclcpp_LIBRARY_DIRS})
 
 add_subdirectory(tutorials/move_group_interface)
+add_subdirectory(tutorials/pick_place)
 
 ament_export_include_directories(include)
 ament_export_dependencies(moveit_ros_planning_interface)
