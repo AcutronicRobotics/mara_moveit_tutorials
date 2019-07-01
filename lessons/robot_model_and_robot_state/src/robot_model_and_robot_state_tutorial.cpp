@@ -115,7 +115,7 @@ int main(int argc, char** argv)
   // "ee_link" which is the most distal link in the
   // "manipulator" group of the robot.
   kinematic_state->setToRandomPositions(joint_model_group);
-  const Eigen::Affine3d& end_effector_state = kinematic_state->getGlobalLinkTransform("ee_link");
+  const Eigen::Isometry3d& end_effector_state = kinematic_state->getGlobalLinkTransform("ee_link");
 
   /* Print end-effector pose. Remember that this is in the model frame */
   ROS_INFO_STREAM("Translation: \n" << end_effector_state.translation() << "\n");
